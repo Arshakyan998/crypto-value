@@ -1,0 +1,38 @@
+.header_main {
+  margin: 20px auto;
+  width: 600px;
+  text-align: center;
+  position: relative;
+
+  input[type="text"] {
+    width: 60%;
+    background: transparent;
+    border: 3px solid black;
+    color: #fff;
+    padding: 10px;
+    font-size: 25px;
+    outline: none;
+    border-radius: 15px;
+  }
+  &_search_result {
+    max-height: 500px;
+    width: 500px;
+    overflow-y: auto;
+    margin: 5px auto;
+    position: absolute;
+    left: 8%;
+    z-index: 1;
+
+    background-color: gray;
+    border-radius: 5px;
+
+    &_query {
+      width: 400px;
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;
+      margin: auto;
+      cursor: pointer;
+    }
+  }
+}

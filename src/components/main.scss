@@ -1,0 +1,50 @@
+.main{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+             &_show{
+                 
+                  
+             transition: all 0.15s linear;
+             height: 100%;
+             opacity: 1;
+
+             }
+      
+}
+
+ .hidden {
+               
+                transition: all 0.15s linear;
+               max-height: 250px;
+               overflow: hidden;
+                opacity: 0;
+        } 
+
+        tbody{
+                >tr{cursor: pointer;}
+        }
+
+
+        .loader{
+                border-top: 20px solid transparent;
+                border-left: 20px solid red;
+                border-right: 20px solid red;
+                border-bottom: 20px solid transparent;
+                border-radius: 50%;
+                margin:15% auto;
+                width: 100px;
+                height: 100px;
+                animation: loader 0.50s linear infinite ;
+                
+
+        }
+
+        @keyframes loader{
+                0%{
+                        transform: rotate(0deg);
+                }
+                100%{ transform: rotate(360deg);
+                }
+        }
