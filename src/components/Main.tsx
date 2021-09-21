@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 
 import servicWorker from "../servicWorker/servicWorker";
 import useFetching from "../userHooks/useFetching";
+import { useLazyaLoad } from "../userHooks/useLazyaLoad";
 import { usePagination } from "../userHooks/usePagination";
 
 import { Header } from "./Header";
@@ -26,6 +27,8 @@ export interface value {
 export const Main: React.FC = (): React.ReactElement => {
   const currentPage = React.useRef<number>(1);
 
+  const showBlock=React.useRef<HTMLDivElement | null |any >(null)
+
   const [data, setData] = React.useState<value[]>([]);
   const [tatalPages, setTotalPages] = React.useState<number>();
   const [limit, setLimit] = React.useState<number>(20);
@@ -38,8 +41,11 @@ export const Main: React.FC = (): React.ReactElement => {
   const { getDate, error, loading } = useFetching(async () => {
     const response = await servicWorker.getDate(page, limit);
     setTotalPages(+response.headers.total);
-    setData(response.data);
+    setData(prev=> [...prev,...response.data]);
   });
+
+  
+  
 
   const pages = usePagination(tatalPages ? tatalPages : 0, limit);
 
@@ -73,8 +79,6 @@ export const Main: React.FC = (): React.ReactElement => {
         return aggr;
       }, [])
       .sort();
-
-      console.log(newArr);
       
 
     const fakeArr = [...data];
@@ -108,12 +112,20 @@ export const Main: React.FC = (): React.ReactElement => {
   }
 
   }
+  //   obsorever:any,
+  // page:number,
+  // pages:number,
+  // setPage:(prev:number)=>number,
+  // loading:boolean,
+  // showBlock:HTMLDivElement
+
+  useLazyaLoad(page,pages,setPage,loading,showBlock.current)
+
+
   return (
     <div>
       <Header />
-      {
-        loading ? <div className='loader'></div>:
-      
+
       <table style={{ width: "100%" }}>
         <thead>
           <tr>
@@ -131,7 +143,7 @@ export const Main: React.FC = (): React.ReactElement => {
         <tbody>
           {data.map((el) => {
             return (
-              <tr key={el.id} onClick={() => history.push(`/main/${el.id}`)}>
+              <tr key={el.id+el.trade_volume_24h_btc} onClick={() => history.push(`/main/${el.id}`)}>
                 <td>
                   <img src={el.image} alt="" />
                 </td>
@@ -154,14 +166,20 @@ export const Main: React.FC = (): React.ReactElement => {
             );
           })}
         </tbody>
-      </table>}
+      </table>
       {error && <p> {error} </p>}
-      <Pagination
+      {
+        loading &&<div className='loader'></div>
+        }
+      
+       <div ref={showBlock}> show</div>
+      {/* <Pagination
         pages={pages}
         currentPage={page}
         nextPage={nextPage}
         prevPage={prevPage}
-      />
+      /> */}
+
     </div>
   );
 };
