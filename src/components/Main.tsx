@@ -112,7 +112,6 @@ export const Main: React.FC = (): React.ReactElement => {
   }
 
   }
-  //   obsorever:any,
   // page:number,
   // pages:number,
   // setPage:(prev:number)=>number,

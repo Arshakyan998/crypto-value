@@ -67,7 +67,7 @@ interface data {
   year_established: number;
 }
 
-export const GetById = () => {
+export const GetById:React.FC = ():React.ReactElement => {
   const params: Params = useParams();
 
   const history=useHistory()
