@@ -3,15 +3,15 @@ import React from 'react'
 
 export function useLazyaLoad  (
     
-        page:number,                    // page es pahin vor ejum enq et ejna
-        pages:number,                   // qani hat ej ka eta
-        setPage:any,                   // state (page) poxox funkciana
-        loading:boolean,               // loadingna
-        showBlock:HTMLDivElement | any // es en elementna um petqa hetevvi
+        page:number,                    
+        pages:number,                   
+        setPage:any,                  
+        loading:boolean,               
+        showBlock:HTMLDivElement | any 
 
         )  {
    
-                const obsorever=React.useRef<null | any>() // esi ena ov vor nayuma showBlockin
+                const obsorever=React.useRef<null | any>() 
 
         React.useMemo(() => {
 
